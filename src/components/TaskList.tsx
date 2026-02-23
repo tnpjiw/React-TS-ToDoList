@@ -19,7 +19,7 @@ const TaskList = ({ task, deleteTask,toggleTask }: FormTodoProps) => {
         ) : (
             <FaRegCircle className="text-gray-400 hover:text-gray-600 text-3xl cursor-pointer" onClick={()=>toggleTask(task.id)}/>
         )}
-        <p className={task.isCompleted ? "line-through text-gray-400" : ""}>{task.text}</p>
+        <p className={task.isCompleted ? "line-through text-gray-400 cursor-pointers" : "cursor-pointer"}  onClick={()=>toggleTask(task.id)}>{task.text}</p>
       </div>
       <IoIosCloseCircle
         className="text-red-400 hover:text-red-500 text-3xl ml-auto cursor-pointer"

@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react"
+import { use, useState, type FormEvent } from "react"
 import type { Task } from "../types/type-task"
 
 const useTask = () => {
@@ -27,7 +27,25 @@ const useTask = () => {
       c.id === id ? {...c, isCompleted: !c.isCompleted} : c
     ))
   }
-  return {tasks, addTask,setAddTask, submitTask, deleteTask, toggleTask,}
+
+  const clearCompleted = ()=>{
+    setTasks(prev => prev.map(task=> ({
+      ...task,isCompleted: false
+    })
+    ))
+  }
+
+  const [filter,setFilter] = useState<"all" | "inprogress" | "complete">("all")
+  
+    const filterTasks = tasks.filter(task=>
+      filter === "all"
+      ? true 
+      : filter === "complete"
+      ? task.isCompleted
+      : !task.isCompleted
+    )
+  
+  return {tasks, addTask,setAddTask, submitTask, deleteTask, toggleTask,clearCompleted,filterTasks, setFilter}
 }
 
 export default useTask
